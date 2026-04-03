@@ -30,7 +30,7 @@ personal_website/
 ### 1. 克隆或下载项目
 
 ```bash
-git clone https://github.com/yourusername/personal_website.git
+git clone https://github.com/knmmdk/Obscuron.github.io.git
 cd personal_website
 ```
 
@@ -157,7 +157,7 @@ const typingConfig = {
 
 ## 许可证
 
-MIT License - 可自由使用和修改
+无 - 保留所有权利
 
 ## 致谢
 

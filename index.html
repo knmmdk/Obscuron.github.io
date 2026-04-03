@@ -1,412 +1,653 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="个人主页 - 展示我的项目、技能和联系方式">
-    <title>我的个人主页</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta name="description" content="张明 - 物理学本科生 | 量子信息与计算物理研究">
+    <title>张明 | 学术个人主页</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Noto Serif SC', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        academic: {
+                            50: '#f8f9fa',
+                            100: '#e9ecef',
+                            200: '#dee2e6',
+                            300: '#ced4da',
+                            400: '#adb5bd',
+                            500: '#6c757d',
+                            600: '#495057',
+                            700: '#343a40',
+                            800: '#212529',
+                            900: '#1a1d20',
+                        },
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Custom Styles */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', serif;
+        }
+        
+        /* Smooth transitions */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        
+        .dark ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+        
+        /* Animation classes */
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        
+        /* Card hover effect */
+        .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-4px);
+        }
+        
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Dark mode gradient */
+        .dark .gradient-text {
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
 </head>
-<body>
-    <!-- 导航栏 -->
-    <nav class="navbar" id="navbar">
-        <div class="container">
-            <div class="nav-brand">
-                <a href="#home">Portfolio</a>
+<body class="bg-academic-50 text-academic-800 dark:bg-academic-900 dark:text-academic-100 antialiased">
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-academic-900/80 backdrop-blur-md border-b border-academic-200 dark:border-academic-700">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <a href="#home" class="font-serif text-xl font-bold text-primary-700 dark:text-primary-400">
+                    <i class="fas fa-atom mr-2"></i>Zhang Ming
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link text-academic-600 dark:text-academic-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors">首页</a>
+                    <a href="#research" class="nav-link text-academic-600 dark:text-academic-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors">研究</a>
+                    <a href="#projects" class="nav-link text-academic-600 dark:text-academic-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors">项目</a>
+                    <a href="#notes" class="nav-link text-academic-600 dark:text-academic-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors">笔记</a>
+                    <a href="#contact" class="nav-link text-academic-600 dark:text-academic-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors">联系</a>
+                    
+                    <!-- Dark Mode Toggle -->
+                    <button id="themeToggle" class="p-2 rounded-lg bg-academic-100 dark:bg-academic-800 text-academic-600 dark:text-academic-300 hover:bg-academic-200 dark:hover:bg-academic-700 transition-colors" aria-label="切换主题">
+                        <i class="fas fa-sun hidden dark:block"></i>
+                        <i class="fas fa-moon block dark:hidden"></i>
+                    </button>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center space-x-4">
+                    <button id="themeToggleMobile" class="p-2 rounded-lg bg-academic-100 dark:bg-academic-800 text-academic-600 dark:text-academic-300" aria-label="切换主题">
+                        <i class="fas fa-sun hidden dark:block"></i>
+                        <i class="fas fa-moon block dark:hidden"></i>
+                    </button>
+                    <button id="mobileMenuBtn" class="p-2 text-academic-600 dark:text-academic-300" aria-label="打开菜单">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
             </div>
-            <button class="nav-toggle" id="navToggle" aria-label="切换导航菜单">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#home" class="nav-link active">首页</a></li>
-                <li><a href="#about" class="nav-link">关于我</a></li>
-                <li><a href="#skills" class="nav-link">技能</a></li>
-                <li><a href="#projects" class="nav-link">项目</a></li>
-                <li><a href="#contact" class="nav-link">联系</a></li>
-            </ul>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white dark:bg-academic-900 border-t border-academic-200 dark:border-academic-700">
+            <div class="px-4 py-3 space-y-2">
+                <a href="#home" class="block py-2 text-academic-600 dark:text-academic-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium">首页</a>
+                <a href="#research" class="block py-2 text-academic-600 dark:text-academic-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium">研究</a>
+                <a href="#projects" class="block py-2 text-academic-600 dark:text-academic-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium">项目</a>
+                <a href="#notes" class="block py-2 text-academic-600 dark:text-academic-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium">笔记</a>
+                <a href="#contact" class="block py-2 text-academic-600 dark:text-academic-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium">联系</a>
+            </div>
         </div>
     </nav>
 
-    <!-- 首页英雄区 -->
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <p class="hero-greeting">你好，我是</p>
-                    <h1 class="hero-title">你的名字</h1>
-                    <p class="hero-subtitle">
-                        <span class="typing-text" id="typingText"></span>
-                        <span class="cursor">|</span>
-                    </p>
-                    <p class="hero-description">
-                        热爱编程，专注于创建优雅且实用的解决方案。
-                    </p>
-                    <div class="hero-buttons">
-                        <a href="#projects" class="btn btn-primary">查看作品</a>
-                        <a href="#contact" class="btn btn-secondary">联系我</a>
-                    </div>
-                </div>
-                <div class="hero-image">
-                    <div class="hero-avatar">
-                        <img src="https://via.placeholder.com/300x300/6366f1/ffffff?text=Your+Photo" alt="个人头像">
-                    </div>
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-16 pb-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <!-- Avatar -->
+            <div class="mb-8 fade-in-up">
+                <div class="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-primary-500 to-purple-600 flex items-center justify-center text-white text-4xl font-serif shadow-xl">
+                    <i class="fas fa-user-graduate"></i>
                 </div>
             </div>
-            <div class="scroll-indicator">
-                <a href="#about" aria-label="向下滚动">
-                    <span></span>
+            
+            <!-- Name & Title -->
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 fade-in-up delay-100">
+                <span class="gradient-text">张明</span>
+            </h1>
+            
+            <p class="text-lg sm:text-xl text-academic-600 dark:text-academic-400 mb-6 fade-in-up delay-200">
+                物理学本科生 | 量子信息与计算物理
+            </p>
+            
+            <!-- Bio -->
+            <div class="max-w-2xl mx-auto text-academic-600 dark:text-academic-400 leading-relaxed mb-8 fade-in-up delay-300">
+                <p class="mb-4">
+                    研究兴趣集中于<strong class="text-academic-800 dark:text-academic-200">量子信息科学</strong>、<strong class="text-academic-800 dark:text-academic-200">计算物理模拟</strong>与<strong class="text-academic-800 dark:text-academic-200">AI可视化</strong>。
+                </p>
+                <p class="mb-4">
+                    擅长 Python、数值计算、LaTeX 学术写作、前端可视化。
+                </p>
+                <p>
+                    持续开源学术工具与教学代码，致力于学术成果可复现与科普传播。
+                </p>
+            </div>
+            
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 fade-in-up delay-300">
+                <a href="#projects" class="px-8 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-medium transition-colors shadow-lg hover:shadow-xl">
+                    <i class="fas fa-flask mr-2"></i>查看项目
+                </a>
+                <a href="#contact" class="px-8 py-3 bg-white dark:bg-academic-800 text-primary-600 dark:text-primary-400 border-2 border-primary-600 dark:border-primary-400 rounded-lg font-medium hover:bg-primary-50 dark:hover:bg-academic-700 transition-colors">
+                    <i class="fas fa-envelope mr-2"></i>学术联系
+                </a>
+            </div>
+            
+            <!-- Scroll Indicator -->
+            <div class="mt-16 animate-bounce">
+                <a href="#research" class="text-academic-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                    <i class="fas fa-chevron-down text-2xl"></i>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- 关于我 -->
-    <section id="about" class="about section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">关于我</h2>
-                <p class="section-subtitle">了解更多关于我的信息</p>
+    <!-- Research Interests Section -->
+    <section id="research" class="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-academic-800">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-academic-800 dark:text-academic-100">研究方向</h2>
+                <div class="w-20 h-1 bg-primary-600 mx-auto rounded-full"></div>
             </div>
-            <div class="about-content">
-                <div class="about-image">
-                    <img src="https://via.placeholder.com/400x500/4f46e5/ffffff?text=About+Me" alt="关于我">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Research Area 1 -->
+                <div class="p-6 rounded-xl bg-academic-50 dark:bg-academic-900 border border-academic-200 dark:border-academic-700 hover:border-primary-300 dark:hover:border-primary-700 transition-all group">
+                    <div class="w-12 h-12 rounded-lg bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-atom text-2xl text-primary-600 dark:text-primary-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-academic-800 dark:text-academic-100">量子信息与量子计算</h3>
+                    <p class="text-academic-600 dark:text-academic-400">量子比特、量子门操作、量子纠缠与量子算法研究</p>
                 </div>
-                <div class="about-text">
-                    <h3>我是谁</h3>
-                    <p>
-                        这里写一段关于你自己的介绍。描述你的背景、兴趣、职业目标等。
-                        让访客能够了解你的个性和价值观。
+                
+                <!-- Research Area 2 -->
+                <div class="p-6 rounded-xl bg-academic-50 dark:bg-academic-900 border border-academic-200 dark:border-academic-700 hover:border-primary-300 dark:hover:border-primary-700 transition-all group">
+                    <div class="w-12 h-12 rounded-lg bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-calculator text-2xl text-purple-600 dark:text-purple-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-academic-800 dark:text-academic-100">计算物理与数值模拟</h3>
+                    <p class="text-academic-600 dark:text-academic-400">物理系统的数值解法、蒙特卡洛模拟、有限元分析</p>
+                </div>
+                
+                <!-- Research Area 3 -->
+                <div class="p-6 rounded-xl bg-academic-50 dark:bg-academic-900 border border-academic-200 dark:border-academic-700 hover:border-primary-300 dark:hover:border-primary-700 transition-all group">
+                    <div class="w-12 h-12 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-brain text-2xl text-green-600 dark:text-green-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-academic-800 dark:text-academic-100">AI/机器学习在物理中的应用</h3>
+                    <p class="text-academic-600 dark:text-academic-400">神经网络求解微分方程、物理数据挖掘、预测建模</p>
+                </div>
+                
+                <!-- Research Area 4 -->
+                <div class="p-6 rounded-xl bg-academic-50 dark:bg-academic-900 border border-academic-200 dark:border-academic-700 hover:border-primary-300 dark:hover:border-primary-700 transition-all group">
+                    <div class="w-12 h-12 rounded-lg bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-chart-line text-2xl text-orange-600 dark:text-orange-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-academic-800 dark:text-academic-100">学术可视化与教学动画</h3>
+                    <p class="text-academic-600 dark:text-academic-400">物理概念可视化、交互式教学工具、科学传播</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-academic-800 dark:text-academic-100">项目作品</h2>
+                <div class="w-20 h-1 bg-primary-600 mx-auto rounded-full mb-4"></div>
+                <p class="text-academic-600 dark:text-academic-400">开源学术工具与教学代码</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card bg-white dark:bg-academic-800 rounded-xl overflow-hidden shadow-lg border border-academic-200 dark:border-academic-700">
+                    <div class="h-48 bg-gradient-to-br from-primary-500 to-purple-600 flex items-center justify-center">
+                        <i class="fas fa-wave-square text-6xl text-white/80"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-academic-800 dark:text-academic-100">量子态演化可视化</h3>
+                        <p class="text-sm text-academic-500 dark:text-academic-400 mb-3">
+                            <i class="fas fa-code mr-1"></i> Python, Matplotlib, NumPy
+                        </p>
+                        <p class="text-academic-600 dark:text-academic-400 mb-4">
+                            实现量子比特叠加态、纠缠态、门操作动态演示，帮助理解量子力学基础概念。
+                        </p>
+                        <a href="#" class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium">
+                            <i class="fab fa-github mr-2"></i>查看代码
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card bg-white dark:bg-academic-800 rounded-xl overflow-hidden shadow-lg border border-academic-200 dark:border-academic-700">
+                    <div class="h-48 bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center">
+                        <i class="fas fa-film text-6xl text-white/80"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-academic-800 dark:text-academic-100">物理过程动画库</h3>
+                        <p class="text-sm text-academic-500 dark:text-academic-400 mb-3">
+                            <i class="fas fa-code mr-1"></i> HTML5 Canvas, JavaScript
+                        </p>
+                        <p class="text-academic-600 dark:text-academic-400 mb-4">
+                            波函数、干涉、衍射、简谐运动等物理过程交互式动画，支持参数调节。
+                        </p>
+                        <a href="#" class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium">
+                            <i class="fab fa-github mr-2"></i>查看代码
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card bg-white dark:bg-academic-800 rounded-xl overflow-hidden shadow-lg border border-academic-200 dark:border-academic-700">
+                    <div class="h-48 bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center">
+                        <i class="fas fa-file-alt text-6xl text-white/80"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-academic-800 dark:text-academic-100">LaTeX学术模板集</h3>
+                        <p class="text-sm text-academic-500 dark:text-academic-400 mb-3">
+                            <i class="fas fa-code mr-1"></i> LaTeX
+                        </p>
+                        <p class="text-academic-600 dark:text-academic-400 mb-4">
+                            物理讲义、作业、报告、Beamer幻灯片模板，符合学术规范，开箱即用。
+                        </p>
+                        <a href="#" class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium">
+                            <i class="fab fa-github mr-2"></i>查看代码
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 4 - GitHub -->
+                <div class="project-card bg-white dark:bg-academic-800 rounded-xl overflow-hidden shadow-lg border border-academic-200 dark:border-academic-700">
+                    <div class="h-48 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
+                        <i class="fab fa-github text-6xl text-white/80"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-academic-800 dark:text-academic-100">GitHub主页</h3>
+                        <p class="text-sm text-academic-500 dark:text-academic-400 mb-3">
+                            <i class="fas fa-code-branch mr-1"></i> 更多开源项目
+                        </p>
+                        <p class="text-academic-600 dark:text-academic-400 mb-4">
+                            访问我的GitHub主页，查看更多学术工具、物理模拟代码和教学资源。
+                        </p>
+                        <a href="https://github.com/xxx" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium">
+                            <i class="fab fa-github mr-2"></i>访问主页
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Notes Section -->
+    <section id="notes" class="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-academic-800">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-academic-800 dark:text-academic-100">学术笔记</h2>
+                <div class="w-20 h-1 bg-primary-600 mx-auto rounded-full mb-4"></div>
+                <p class="text-academic-600 dark:text-academic-400">学习记录与知识分享</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Note 1 -->
+                <article class="bg-academic-50 dark:bg-academic-900 rounded-xl p-6 border border-academic-200 dark:border-academic-700 hover:shadow-lg transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <span class="px-3 py-1 text-xs font-medium bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full">量子力学</span>
+                        <span class="ml-auto text-sm text-academic-500 dark:text-academic-400">2026.01</span>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2 text-academic-800 dark:text-academic-100">量子态的数学表示</h3>
+                    <p class="text-academic-600 dark:text-academic-400 text-sm mb-4">
+                        希尔伯特空间、狄拉克符号、密度矩阵等基础概念的整理与理解...
                     </p>
-                    <p>
-                        可以分享你的学习经历、工作经历，以及是什么驱动你不断前进。
-                        保持真诚和热情，让人们感受到你的独特之处。
+                    <a href="#" class="text-primary-600 dark:text-primary-400 hover:underline text-sm font-medium">
+                        阅读更多 <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </article>
+                
+                <!-- Note 2 -->
+                <article class="bg-academic-50 dark:bg-academic-900 rounded-xl p-6 border border-academic-200 dark:border-academic-700 hover:shadow-lg transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <span class="px-3 py-1 text-xs font-medium bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full">数值计算</span>
+                        <span class="ml-auto text-sm text-academic-500 dark:text-academic-400">2026.02</span>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2 text-academic-800 dark:text-academic-100">Python科学计算入门</h3>
+                    <p class="text-academic-600 dark:text-academic-400 text-sm mb-4">
+                        NumPy、SciPy、Matplotlib在物理问题中的应用实例与技巧分享...
                     </p>
-                    <div class="about-stats">
-                        <div class="stat-item">
-                            <span class="stat-number" data-target="3">0</span>
-                            <span class="stat-label">年经验</span>
+                    <a href="#" class="text-primary-600 dark:text-primary-400 hover:underline text-sm font-medium">
+                        阅读更多 <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </article>
+                
+                <!-- Note 3 -->
+                <article class="bg-academic-50 dark:bg-academic-900 rounded-xl p-6 border border-academic-200 dark:border-academic-700 hover:shadow-lg transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <span class="px-3 py-1 text-xs font-medium bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full">学术写作</span>
+                        <span class="ml-auto text-sm text-academic-500 dark:text-academic-400">2026.03</span>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2 text-academic-800 dark:text-academic-100">LaTeX排版最佳实践</h3>
+                    <p class="text-academic-600 dark:text-academic-400 text-sm mb-4">
+                        物理公式排版、参考文献管理、幻灯片制作的实用技巧总结...
+                    </p>
+                    <a href="#" class="text-primary-600 dark:text-primary-400 hover:underline text-sm font-medium">
+                        阅读更多 <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-academic-800 dark:text-academic-100">学术联系</h2>
+                <div class="w-20 h-1 bg-primary-600 mx-auto rounded-full mb-4"></div>
+                <p class="text-academic-600 dark:text-academic-400">欢迎学术合作、研究讨论、项目交流</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Contact Info -->
+                <div class="space-y-6">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 rounded-lg bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-envelope text-xl text-primary-600 dark:text-primary-400"></i>
                         </div>
-                        <div class="stat-item">
-                            <span class="stat-number" data-target="20">0</span>
-                            <span class="stat-label">完成项目</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number" data-target="50">0</span>
-                            <span class="stat-label">满意客户</span>
+                        <div>
+                            <h3 class="font-semibold text-academic-800 dark:text-academic-100 mb-1">学术邮箱</h3>
+                            <a href="mailto:xxx@university.edu.cn" class="text-primary-600 dark:text-primary-400 hover:underline">
+                                xxx@university.edu.cn
+                            </a>
+                            <p class="text-sm text-academic-500 dark:text-academic-400 mt-1">仅学术交流使用</p>
                         </div>
                     </div>
-                    <a href="#contact" class="btn btn-primary">下载简历</a>
+                    
+                    <!-- Academic Links -->
+                    <div class="pt-6 border-t border-academic-200 dark:border-academic-700">
+                        <h3 class="font-semibold text-academic-800 dark:text-academic-100 mb-4">学术链接</h3>
+                        <div class="flex flex-wrap gap-3">
+                            <a href="https://github.com/xxx" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-4 py-2 bg-academic-100 dark:bg-academic-800 text-academic-700 dark:text-academic-300 rounded-lg hover:bg-academic-200 dark:hover:bg-academic-700 transition-colors">
+                                <i class="fab fa-github mr-2"></i>GitHub
+                            </a>
+                            <a href="#" class="inline-flex items-center px-4 py-2 bg-academic-100 dark:bg-academic-800 text-academic-700 dark:text-academic-300 rounded-lg hover:bg-academic-200 dark:hover:bg-academic-700 transition-colors">
+                                <i class="fas fa-graduation-cap mr-2"></i>Google Scholar
+                            </a>
+                            <a href="#" class="inline-flex items-center px-4 py-2 bg-academic-100 dark:bg-academic-800 text-academic-700 dark:text-academic-300 rounded-lg hover:bg-academic-200 dark:hover:bg-academic-700 transition-colors">
+                                <i class="fas fa-id-card mr-2"></i>ORCID
+                            </a>
+                            <a href="#" class="inline-flex items-center px-4 py-2 bg-academic-100 dark:bg-academic-800 text-academic-700 dark:text-academic-300 rounded-lg hover:bg-academic-200 dark:hover:bg-academic-700 transition-colors">
+                                <i class="fab fa-linkedin mr-2"></i>LinkedIn
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="bg-white dark:bg-academic-800 rounded-xl p-6 shadow-lg border border-academic-200 dark:border-academic-700">
+                    <form id="contactForm" class="space-y-4">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-academic-700 dark:text-academic-300 mb-1">姓名</label>
+                            <input type="text" id="name" name="name" required class="w-full px-4 py-2 rounded-lg border border-academic-300 dark:border-academic-600 bg-white dark:bg-academic-900 text-academic-800 dark:text-academic-100 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-academic-700 dark:text-academic-300 mb-1">邮箱</label>
+                            <input type="email" id="email" name="email" required class="w-full px-4 py-2 rounded-lg border border-academic-300 dark:border-academic-600 bg-white dark:bg-academic-900 text-academic-800 dark:text-academic-100 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all">
+                        </div>
+                        <div>
+                            <label for="subject" class="block text-sm font-medium text-academic-700 dark:text-academic-300 mb-1">主题</label>
+                            <select id="subject" name="subject" required class="w-full px-4 py-2 rounded-lg border border-academic-300 dark:border-academic-600 bg-white dark:bg-academic-900 text-academic-800 dark:text-academic-100 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all">
+                                <option value="">请选择</option>
+                                <option value="research">学术合作</option>
+                                <option value="discussion">研究讨论</option>
+                                <option value="project">项目交流</option>
+                                <option value="other">其他</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-academic-700 dark:text-academic-300 mb-1">消息</label>
+                            <textarea id="message" name="message" rows="4" required class="w-full px-4 py-2 rounded-lg border border-academic-300 dark:border-academic-600 bg-white dark:bg-academic-900 text-academic-800 dark:text-academic-100 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-medium transition-colors shadow-lg hover:shadow-xl">
+                            <i class="fas fa-paper-plane mr-2"></i>发送消息
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 技能 -->
-    <section id="skills" class="skills section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">技能专长</h2>
-                <p class="section-subtitle">我掌握的技术栈</p>
-            </div>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                    </div>
-                    <h3 class="skill-name">前端开发</h3>
-                    <p class="skill-description">HTML5, CSS3, JavaScript, React, Vue.js</p>
-                    <div class="skill-level">
-                        <div class="skill-progress" data-level="90"></div>
-                    </div>
+    <!-- Footer -->
+    <footer class="py-8 px-4 sm:px-6 lg:px-8 bg-academic-800 dark:bg-academic-950 text-academic-300">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-sm">
+                        <i class="fas fa-atom mr-2 text-primary-400"></i>
+                        © 2026 张明 | 学术个人主页
+                    </p>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                    </div>
-                    <h3 class="skill-name">后端开发</h3>
-                    <p class="skill-description">Node.js, Python, Java, SQL, MongoDB</p>
-                    <div class="skill-level">
-                        <div class="skill-progress" data-level="80"></div>
-                    </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm text-academic-400">基于</span>
+                    <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer" class="text-sm text-primary-400 hover:text-primary-300 transition-colors">
+                        <i class="fab fa-github mr-1"></i>GitHub Pages
+                    </a>
+                    <span class="text-sm text-academic-400">构建</span>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-                    </div>
-                    <h3 class="skill-name">UI/UX 设计</h3>
-                    <p class="skill-description">Figma, Adobe XD, 用户体验设计</p>
-                    <div class="skill-level">
-                        <div class="skill-progress" data-level="75"></div>
-                    </div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-                    </div>
-                    <h3 class="skill-name">版本控制</h3>
-                    <p class="skill-description">Git, GitHub, GitLab, CI/CD</p>
-                    <div class="skill-level">
-                        <div class="skill-progress" data-level="85"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 项目展示 -->
-    <section id="projects" class="projects section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">项目作品</h2>
-                <p class="section-subtitle">我的一些代表性项目</p>
-            </div>
-            <div class="projects-filter">
-                <button class="filter-btn active" data-filter="all">全部</button>
-                <button class="filter-btn" data-filter="web">网站</button>
-                <button class="filter-btn" data-filter="app">应用</button>
-                <button class="filter-btn" data-filter="design">设计</button>
-            </div>
-            <div class="projects-grid">
-                <div class="project-card" data-category="web">
-                    <div class="project-image">
-                        <img src="https://via.placeholder.com/400x250/6366f1/ffffff?text=Project+1" alt="项目1">
-                        <div class="project-overlay">
-                            <a href="#" class="project-link" aria-label="查看项目">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3 class="project-title">电商平台</h3>
-                        <p class="project-description">一个功能完善的在线购物平台，支持商品管理、购物车和支付功能。</p>
-                        <div class="project-tags">
-                            <span class="tag">React</span>
-                            <span class="tag">Node.js</span>
-                            <span class="tag">MongoDB</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card" data-category="app">
-                    <div class="project-image">
-                        <img src="https://via.placeholder.com/400x250/8b5cf6/ffffff?text=Project+2" alt="项目2">
-                        <div class="project-overlay">
-                            <a href="#" class="project-link" aria-label="查看项目">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3 class="project-title">任务管理应用</h3>
-                        <p class="project-description">帮助用户高效管理日常任务，支持团队协作和进度追踪。</p>
-                        <div class="project-tags">
-                            <span class="tag">Vue.js</span>
-                            <span class="tag">Firebase</span>
-                            <span class="tag">PWA</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card" data-category="design">
-                    <div class="project-image">
-                        <img src="https://via.placeholder.com/400x250/ec4899/ffffff?text=Project+3" alt="项目3">
-                        <div class="project-overlay">
-                            <a href="#" class="project-link" aria-label="查看项目">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3 class="project-title">品牌视觉设计</h3>
-                        <p class="project-description">为初创公司设计的完整品牌视觉识别系统。</p>
-                        <div class="project-tags">
-                            <span class="tag">Figma</span>
-                            <span class="tag">Illustrator</span>
-                            <span class="tag">品牌设计</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card" data-category="web">
-                    <div class="project-image">
-                        <img src="https://via.placeholder.com/400x250/10b981/ffffff?text=Project+4" alt="项目4">
-                        <div class="project-overlay">
-                            <a href="#" class="project-link" aria-label="查看项目">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3 class="project-title">个人博客系统</h3>
-                        <p class="project-description">基于静态生成的博客系统，支持 Markdown 写作和主题定制。</p>
-                        <div class="project-tags">
-                            <span class="tag">Next.js</span>
-                            <span class="tag">Tailwind</span>
-                            <span class="tag">Vercel</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card" data-category="app">
-                    <div class="project-image">
-                        <img src="https://via.placeholder.com/400x250/f59e0b/ffffff?text=Project+5" alt="项目5">
-                        <div class="project-overlay">
-                            <a href="#" class="project-link" aria-label="查看项目">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3 class="project-title">天气查询应用</h3>
-                        <p class="project-description">实时天气查询应用，支持多城市切换和天气预警。</p>
-                        <div class="project-tags">
-                            <span class="tag">React Native</span>
-                            <span class="tag">API</span>
-                            <span class="tag">移动应用</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card" data-category="design">
-                    <div class="project-image">
-                        <img src="https://via.placeholder.com/400x250/3b82f6/ffffff?text=Project+6" alt="项目6">
-                        <div class="project-overlay">
-                            <a href="#" class="project-link" aria-label="查看项目">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3 class="project-title">数据可视化仪表盘</h3>
-                        <p class="project-description">企业级数据可视化平台，支持多种图表类型和实时数据更新。</p>
-                        <div class="project-tags">
-                            <span class="tag">D3.js</span>
-                            <span class="tag">TypeScript</span>
-                            <span class="tag">数据可视化</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 联系我 -->
-    <section id="contact" class="contact section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">联系我</h2>
-                <p class="section-subtitle">有项目想法？让我们一起合作</p>
-            </div>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                        </div>
-                        <div class="contact-details">
-                            <h3>邮箱</h3>
-                            <p>your.email@example.com</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                        </div>
-                        <div class="contact-details">
-                            <h3>位置</h3>
-                            <p>中国，你的城市</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                        </div>
-                        <div class="contact-details">
-                            <h3>电话</h3>
-                            <p>+86 138 0000 0000</p>
-                        </div>
-                    </div>
-                    <div class="social-links">
-                        <a href="#" class="social-link" aria-label="GitHub">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-                        </a>
-                        <a href="#" class="social-link" aria-label="LinkedIn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-                        </a>
-                        <a href="#" class="social-link" aria-label="Twitter">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
-                        </a>
-                        <a href="#" class="social-link" aria-label="微信">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-                        </a>
-                    </div>
-                </div>
-                <form class="contact-form" id="contactForm">
-                    <div class="form-group">
-                        <label for="name">姓名</label>
-                        <input type="text" id="name" name="name" required placeholder="请输入您的姓名">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">邮箱</label>
-                        <input type="email" id="email" name="email" required placeholder="请输入您的邮箱">
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">主题</label>
-                        <input type="text" id="subject" name="subject" required placeholder="请输入主题">
-                    </div>
-                    <div class="form-group">
-                        <label for="message">消息</label>
-                        <textarea id="message" name="message" rows="5" required placeholder="请输入您的消息"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-full">发送消息</button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- 页脚 -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <h3>Portfolio</h3>
-                    <p>用代码创造价值，用设计传递美感。</p>
-                </div>
-                <div class="footer-links">
-                    <h4>快速链接</h4>
-                    <ul>
-                        <li><a href="#home">首页</a></li>
-                        <li><a href="#about">关于我</a></li>
-                        <li><a href="#projects">项目</a></li>
-                        <li><a href="#contact">联系</a></li>
-                    </ul>
-                </div>
-                <div class="footer-social">
-                    <h4>关注我</h4>
-                    <div class="social-links">
-                        <a href="#" class="social-link" aria-label="GitHub">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-                        </a>
-                        <a href="#" class="social-link" aria-label="LinkedIn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-                        </a>
-                        <a href="#" class="social-link" aria-label="Twitter">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 你的名字. 保留所有权利。</p>
             </div>
         </div>
     </footer>
 
-    <!-- 回到顶部按钮 -->
-    <button class="back-to-top" id="backToTop" aria-label="回到顶部">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
-    </button>
-
-    <script src="js/main.js"></script>
+    <!-- JavaScript -->
+    <script>
+        // Dark Mode Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeToggleMobile = document.getElementById('themeToggleMobile');
+        const html = document.documentElement;
+        
+        // Check for saved theme preference or default to light mode
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        if (currentTheme === 'dark') {
+            html.classList.add('dark');
+        }
+        
+        function toggleTheme() {
+            html.classList.toggle('dark');
+            const theme = html.classList.contains('dark') ? 'dark' : 'light';
+            localStorage.setItem('theme', theme);
+        }
+        
+        themeToggle?.addEventListener('click', toggleTheme);
+        themeToggleMobile?.addEventListener('click', toggleTheme);
+        
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuBtn?.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+        
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerOffset = 80;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Active navigation highlight
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('text-primary-600', 'dark:text-primary-400');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('text-primary-600', 'dark:text-primary-400');
+                }
+            });
+        });
+        
+        // Contact Form Handler
+        const contactForm = document.getElementById('contactForm');
+        contactForm?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(contactForm);
+            const data = Object.fromEntries(formData);
+            
+            // Show success message (in real implementation, send to server)
+            alert('感谢您的留言！我会尽快回复您。');
+            contactForm.reset();
+        });
+        
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe elements for animation
+        document.querySelectorAll('.project-card, article').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
