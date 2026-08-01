@@ -1,4 +1,4 @@
-# Lighthouse-Badger-Easy | GitHub Action Workflow
+# Lighthouse-Badger WorkFlow
 name: "Lighthouse Badger"
 
 env:
@@ -18,7 +18,7 @@ jobs:
       - name: Checkout main repository
         uses: actions/checkout@v4
         with:
-          repository: "knmmdk/Obscuron.github.io"
+          repository: "knmmdk/knmmdk.github.io"
           ref: "main"
           token: ${{ secrets.LIGHTHOUSE_BADGER_TOKEN }}
 
